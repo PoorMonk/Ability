@@ -39,6 +39,8 @@ protected:
 	void Jump();
 	void StopJumping();
 
+	void Attack();
+
 protected:
 	UPROPERTY()
 	AShinbiCharacter* ShinbiCharacter;
@@ -58,4 +60,7 @@ protected:
 	/** Look Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* AttackAction;
 };

@@ -8,6 +8,7 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class UAnimMontage;
 
 UCLASS()
 class ABILITY_API AShinbiCharacter : public ACharacter
@@ -29,6 +30,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void Attack();
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera)
@@ -36,4 +38,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera)
 	UCameraComponent* CameraComponent;
+
+	UPROPERTY(EditDefaultsOnly, Category = Attack)
+	UAnimMontage* AttackAnimMontage;
 };

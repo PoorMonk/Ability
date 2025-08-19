@@ -48,6 +48,11 @@ void AShinbiPlayerController::SetupInputComponent()
 			EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AShinbiPlayerController::Jump);
 			EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AShinbiPlayerController::StopJumping);
 		}
+
+		if (AttackAction)
+		{
+			EnhancedInputComponent->BindAction(AttackAction, ETriggerEvent::Started, this, &AShinbiPlayerController::Attack);
+		}
 	}
 	else
 	{
@@ -110,6 +115,15 @@ void AShinbiPlayerController::StopJumping()
 	if (ShinbiCharacter)
 	{
 		ShinbiCharacter->StopJumping();
+	}
+}
+
+void AShinbiPlayerController::Attack()
+{
+	
+	if (ShinbiCharacter)
+	{
+		ShinbiCharacter->Attack();
 	}
 }
 
