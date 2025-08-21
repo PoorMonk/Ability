@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include "ShinbiCharacter.generated.h"
 
 class USpringArmComponent;
@@ -11,7 +12,7 @@ class UCameraComponent;
 class UAnimMontage;
 
 UCLASS()
-class ABILITY_API AShinbiCharacter : public ACharacter
+class ABILITY_API AShinbiCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -30,6 +31,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
 	void Attack();
 
 protected:
@@ -41,4 +44,7 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = Attack)
 	UAnimMontage* AttackAnimMontage;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
+	UAbilitySystemComponent* AbilitySystemComponent;
 };

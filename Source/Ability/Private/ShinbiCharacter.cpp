@@ -57,6 +57,11 @@ void AShinbiCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 	}
 }
 
+UAbilitySystemComponent* AShinbiCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 void AShinbiCharacter::Attack()
 {
 	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
