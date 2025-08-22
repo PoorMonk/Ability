@@ -7,9 +7,12 @@
 #include "AbilitySystemInterface.h"
 #include "ShinbiCharacter.generated.h"
 
+class UGameplayAbility;
 class USpringArmComponent;
 class UCameraComponent;
 class UAnimMontage;
+class UAttributeSet;
+class UAbilitySystemComponent;
 
 UCLASS()
 class ABILITY_API AShinbiCharacter : public ACharacter, public IAbilitySystemInterface
@@ -47,4 +50,10 @@ protected:
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
 	UAbilitySystemComponent* AbilitySystemComponent;
+	
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
+	UAttributeSet* AttributeSet;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> Abilities;
 };

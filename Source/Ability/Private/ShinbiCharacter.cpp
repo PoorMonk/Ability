@@ -7,6 +7,9 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
+#include "AbilitySystemComponent.h"
+#include "AttributeSet.h"
+
 // Sets default values
 AShinbiCharacter::AShinbiCharacter()
 {
@@ -29,13 +32,33 @@ AShinbiCharacter::AShinbiCharacter()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComponent"));
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	CameraComponent->bUsePawnControlRotation = false;
+
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+
+	AttributeSet = CreateDefaultSubobject<UAttributeSet>(TEXT("AttributeSet"));
 }
 
 // Called when the game starts or when spawned
 void AShinbiCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (AbilitySystemComponent)
+	{
+		if (HasAuthority() && Abilities.Num() > 0)
+		{
+			for (int i = 0; i < Abilities.Num(); i++)
+			{
+				if (Abilities[i] == nullptr)
+				{
+					continue;
+				}
+				AbilitySystemComponent->GiveAbility(FGameplayAbilitySpec(Abilities[i].GetDefaultObject(), 1, 0));
+			}
+		}
+
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	}
 }
 
 // Called every frame
